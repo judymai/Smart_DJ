@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                                 <a href="/profile" class="btn btn-info btn-sm">Profile</a>&nbsp; 
-				<a href="/login" class="btn btn-danger btn-sm">Logout</a>
+				<a href="{% url 'login' %}" class="btn btn-danger btn-sm">Logout</a>
                             </div>
                         </li>
 
@@ -75,9 +75,9 @@
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a  href="/">Dashboard</a></li>
-                            <li><a href="/profile">Preferences</a></li>
-                            <li><a href="/about">About</a></li>
+                            <li><a  href="{% url 'index' %}">Dashboard</a></li>
+                            <li><a href="{% url 'profile' %}">Preferences</a></li>
+                            <li><a href="{% url 'about' %}">About</a></li>
                         </ul>
                     </div>
                 </div>
