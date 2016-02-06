@@ -19,5 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^about/$', 'smart_dj.views.about', name='about'),
-    url(r'^layout/$', 'smart_dj.views.layout', name='layout')
+    url(r'^layout/$', 'smart_dj.views.layout', name='layout'),
+    url(r'^index/$', 'smart_dj.views.index', name='index'),
+    url(r'^profile/$', 'smart_dj.views.profile', name='profile')
 ]
