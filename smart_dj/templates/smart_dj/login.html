@@ -27,10 +27,13 @@
         <input type="text" class="form-control" id="username" />
         <label>Enter Password :  </label>
         <input type="password" class="form-control" id="password" />
-        <hr />
+	<hr />
         <input type="submit" value="Log me in!" class="btn btn-info"/>
         {% csrf_token %}
       </form>
+      <hr />
+      Don't have an account?
+      <a href="{% url 'register' %}" class="btn btn-default">Register</a>
     </div>
 
     <div class="col-md-6">
