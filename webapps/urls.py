@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', 'smart_dj.views.index', name='index'),
+    url(r'^layout/$', 'smart_dj.views.layout', name='layout')
 ]
