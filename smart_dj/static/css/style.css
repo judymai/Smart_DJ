@@ -95,7 +95,6 @@ header {
     text-align: right;
 }
 
-
 /* =============================================================
    LOGO SECTION STYLES
  ============================================================ */
@@ -342,6 +341,15 @@ footer {
     width: 70%;
     text-align: center;
     transform: translateX(20%);
+}
+<<<<<<< HEAD
+=======
+}
+
+#white-container {
+    background-color: #F7F7F7;
+    padding: 15px 15px 15px 15px;
+    border-radius: 3px;
 }
 
 #white-container {
