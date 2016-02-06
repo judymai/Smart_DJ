@@ -64,5 +64,51 @@ def login(request):
     context = {message: 'Invalid login'}
     return render(request, 'smart_dj/login.html', context)
 
+def init_room(request):
+    new_room = Room()
+
+    room.name = request.POST['roomname']
+    room.pin = ''
+    i=0
+    while (i < 8):
+        room.pin=room.pin + random.choice(string.ascii_letters+string.digits))
+        i++
+
+    room.host = request.user
+    others = room.otherPeople.all()
+
+    room.current = ''
+    room.last = ''
+    room.playlistLength = request.POST['num_songs']
+
+    #room.expiration = request.POST('')
+
 def room(request):
+    my_room=init_room(request)
+    playlist = []
+    preflist = []
+    blacklist = []
+
+    j=0
+    for k in otherPeople.all():
+        preflist[j] = k.otherPeople.likes.all()
+        blacklist[j] = k.otherPeople.dislikes.all()
+        j++
+
+    i=0
+    j=0
+    while (my_room.current!=my_room.last):
+        if(my_room.current==my_room.last):
+            while (i < (my_room.playlistLength)):
+                song = random.choice(songlist)
+                if (song not in playlist) and
+		   (song not in blacklist):
+                   playlist[i] = random.choice(songlist)
+                    i++
+                current = playlist[0]
+        last = playlist[my_room.playlistLength-1]
+        j++
+        current=playlist[j]
+
     return render(request, 'smart_dj/room.html', {})
+    
