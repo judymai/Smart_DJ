@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^register/$', 'smart_dj.views.register', name='register'),
     url(r'^make_room/$', 'smart_dj.views.make_room', name='make_room'),
     url(r'^join_room/$', 'smart_dj.views.join_room', name='join_room'),
+    url(r'^add_song/$', 'smart_dj.views.add_song', name='add_song'),
     url(r'^room/(?P<pin>[a-zA-Z0-9_@\+\-]+)$', 'smart_dj.views.room', name='room')
 ]

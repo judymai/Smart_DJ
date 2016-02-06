@@ -27,26 +27,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-			        <td><td> 
-                                <td>Love Story</td>
-                                <td>Taylor Swift</td>
-                            </tr>
-                            <tr>
-			        <td><td> 
-				<td>Stitches</td>
-                                <td>Shawn Mendes</td>
-                            </tr>
-                            <tr>
-			        <td><td> 
-				<td>Love Yourself</td>
-                                <td>Justin Bieber</td>
-                            </tr>
-                            <tr>
-			        <td><td> 
-                                <td>Hello</td>
-                                <td>Adele</td>
-                            </tr>
+                            {% for song,artist in liked_songs%}
+                                <tr>
+                                    <td><td>
+                                    <td>{{song}}</td>
+                                    <td>{{artist}}</td>
+                                </td>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div><!--table response -->
@@ -71,26 +58,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-			        <td><td> 
-                                <td>Love Story</td>
-                                <td>Taylor Swift</td>
-                            </tr>
-                            <tr>
-			        <td><td> 
-				<td>Stitches</td>
-                                <td>Shawn Mendes</td>
-                            </tr>
-                            <tr>
-			        <td><td> 
-				<td>Love Yourself</td>
-                                <td>Justin Bieber</td>
-                            </tr>
-                            <tr>
-			        <td><td> 
-                                <td>Hello</td>
-                                <td>Adele</td>
-                            </tr>
+                            {% for song,artist in disliked_songs%}
+                                <tr>
+                                    <td><td>
+                                    <td>{{song}}</td>
+                                    <td>{{artist}}</td>
+                                </td>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div><!--table response -->
@@ -102,15 +76,13 @@
 </div> <!-- row -->
 
 <div class="row">
-
-        <form>
-	    <div class="form-group">
-	        <label for="exampleInput" id="title">Find song</label>
-		<input type="text" class="form-control" id="exampleInput" placeholder="placeholder text">
-	    </div> <!-- form-group-->
-	</form>
-	<button type="submit" class="btn btn-default">Submit</button>
-
+    <form method="post" action="{% url 'add_song' %}">
+        <div class="form-group">
+            {{form}}
+        </div> <!-- form-group-->
+	   <input type="submit" class="btn btn-default" value="Submit"/>
+       {% csrf_token %}
+    </form>
 </div> <!-- row-->
 
 {% endblock %}

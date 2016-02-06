@@ -8,6 +8,7 @@ from django.db import transaction
 from django.core.urlresolvers import reverse
 
 from smart_dj.utils import sp
+from smart_dj.forms import *
 from smart_dj.models import *
 
 import string
@@ -24,6 +25,10 @@ def index(request):
     context['rooms'] = []
     for room in rooms:
         context['rooms'].append((room.name,room.pin))
+    search_results = sp.search(q='Snoop Dogg',limit = 1,offset=0,type='artist')
+    artist_uri = search_results['artists']['items'][0]['uri']
+    for i in sp.artist_top_tracks(artist_uri)['tracks']:
+        print i['name']
     return render(request, 'smart_dj/index.html', context)
 
 def about(request):
@@ -31,10 +36,19 @@ def about(request):
 
 @login_required
 def profile(request):
+    context = {}
+
     user = User.objects.get(id=request.user.id)
     likes_content = LikesList.objects.get(user=user)
     dislikes_content = DislikesList.objects.get(user=user)
-    return render(request, 'smart_dj/profile.html', {})
+    context['form'] = PreferencesForm()
+    context['liked_songs'] = []
+    context['disliked_songs'] = []
+    for likes in likes_content.songs.all():
+        context['liked_songs'].append((likes.title, likes.artist))
+    for dislikes in dislikes_content.songs.all():
+        context['disliked_songs'].append((dislikes.title, dislikes.artist))
+    return render(request, 'smart_dj/profile.html', context)
 
 @transaction.atomic
 def register(request):
@@ -101,8 +115,32 @@ def make_room(request):
     return redirect(reverse('room', kwargs={'pin': new_room.pin}))
 
 @login_required
+<<<<<<< Updated upstream
 def join_room(request):
     return redirect(reverse('room', kwargs={'pin': request.POST['pin']}))
+=======
+def add_song(request):
+    context = {}
+
+    form = PreferencesForm(request.POST)
+    context['form'] = form
+
+    if not form.is_valid():
+        return render(request, 'smart_dj/profile.html', context)
+
+    song_title = form.cleaned_data['song_title']
+    artist_name = form.cleaned_data['artist_name']
+    preference = form.cleaned_data['preference']
+    new_song = Song(title=song_title, artist=artist_name)
+    new_song.save()
+
+    if preference == 'L':
+        request.user.likeslist.songs.add(new_song)
+    else:
+        request.user.dislikeslist.songs.add(new_song)
+
+    return redirect(reverse('profile'))
+>>>>>>> Stashed changes
 
 @login_required
 def room(request, pin):

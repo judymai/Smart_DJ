@@ -7,3 +7,4 @@ class PreferencesForm(forms.Form):
     artist_name = forms.CharField(max_length=60,
                                   label='',
                                   widget=forms.TextInput(attrs={'placeholder': 'Artist Name', 'autocomplete':'off'}))
+    preference = forms.ChoiceField([('L', 'Like'), ('D', 'Dislike')])
