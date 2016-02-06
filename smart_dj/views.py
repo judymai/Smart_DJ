@@ -20,5 +20,8 @@ def layout(request):
 def login(request):
     return render(request, 'smart_dj/login.html', {})
 
+def register(request):
+    return render(request, 'smart_dj/register.html', {})
+
 def room(request):
     return render(request, 'smart_dj/room.html', {})
