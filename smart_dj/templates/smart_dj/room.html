@@ -6,15 +6,17 @@
 {% block body %}
 <div class="row">
   <div class="col-md-7">
-    <h4 class="page-head-line">Room: {{room_name}}</h4>
-    <h5>Host: {{host}}</h5>
-    Give pin to guests to enter this room!<br>
-    <h5>Pin: {{pin}}</h5>
+      <h4 class="page-head-line">Room: {{room_name}}</h4>
+      <div id="white-container">
+	<h5>Host: {{host}}</h5>
+	Give pin to guests to enter this room!<br>
+	<h5>Pin: {{pin}}</h5>
+      </div> <!--whitecontainer-->
   </div>  
 
   <div class="col-md-5">
     <h4 class="page-head-line">Requests</h4>
-    <div class="table-responsive">
+    <div class="table-responsive" id="white-container">
         <table class="table table-hover">
             <thead>
                 <tr>
