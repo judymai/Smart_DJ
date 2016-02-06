@@ -13,3 +13,4 @@ parts
 media/uploads
 tmp
 env.sh
+db.sqlite3
