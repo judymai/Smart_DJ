@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -13,7 +14,6 @@ from django.db import models
 
 class Song(models.Model):
     title = models.TextField(default='Unknown Title')
-    ID = models.TextField(default='')
     artist = models.TextField(default='Unknown Artist')
 
 class Person(models.Model):
@@ -26,8 +26,8 @@ class Room(models.Model):
     name = models.CharField(max_length=50)
     pin = models.CharField(max_length=8)
 
-    host = Person
-    otherPeople = models.ManyToManyField(Person)
+    host = models.ForeignKey(User)
+    otherPeople = models.ManyToManyField(User, related_name='guests')
 
     current = Song
     last = Song

@@ -1,6 +1,6 @@
 from django import forms
 
-class PreferencesForm(form.Form):
+class PreferencesForm(forms.Form):
     song_title = forms.CharField(max_length=30,
                                  label='',
                                  widget=forms.TextInput(attrs={'placeholder': 'Song Title', 'autocomplete':'off'}))

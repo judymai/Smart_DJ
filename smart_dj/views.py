@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+from django.db import transaction
 
 from smart_dj.utils import sp
-from models import *
+from smart_dj.models import *
 
 import string
 import random
@@ -10,70 +14,76 @@ import spotipy
 import os
 
 # Create your views here.
+@login_required
 def index(request):
-    if not request.user.is_authenticated():
-        return render(request, 'smart_dj/index.html', {})
-    user = Person.objects.filter(username=request.user.username)
+    '''
+    user = User.objects.filter(username=request.user.username)
     rooms = Room.objects.filter(Person=user) [:5]
     context = {rooms: rooms}
-    return render(request, 'smart_dj/index.html', context)
+    '''
+    return render(request, 'smart_dj/index.html', {})
 
 def about(request):
     return render(request, 'smart_dj/about.html', {})
 
+@login_required
 def profile(request):
-    if not request.user.is_authenticated():
-        return redirect('login')
     user = Person.objects.filter(username=request.user.username)
     like = Song.objects.filter(Person=user, related_name='person_likes') [:5]
     dislike=Song.objects.filter(Person=user,related_name='person_dislikes')[:5]
     context = {likes: like, dislikes: dislike}
     return render(request, 'smart_dj/profile.html', context)
 
-def layout(request):
-    return render(request, 'smart_dj/layout.html', {})
-
+@transaction.atomic
 def register(request):
-    if request.user.is_authenticated():
-        return redirect('index')
-    if request.method == 'GET':
-        return render(request, 'smart_dj/register.html',{})
-    username = request.POST['username']
-    if len(User.objects.filter(username=username)) == 0:
-        message = 'Username already taken'
-        return render(request, 'smart_dj/register.html',{message: message})
-    password = request.POST['password']
-    user = User.objects.create_user(username,'',password)
-    user.save()
-    person = Person()
-    person.name = username
-    person.save()
-    return redirect ('index')
+    context = {}
 
-def login(request):
-    if request.user.is_authenticated():
-        return redirect('index')
+    # Just display the registration form if this is a GET request
     if request.method == 'GET':
-        return render(request, 'smart_dj/login.html',{})
+        return render(request, 'smart_dj/register.html', context)
+
+    errors = []
+    context['errors'] = errors
+
+    # Checks the validity of the form data
+    if not 'username' in request.POST or not request.POST['username']:
+        errors.append('Username is required.')
+    else:
+        # Save the username in the request context to re-fill the username
+        # field in case the form has errrors
+        context['username'] = request.POST['username']
+
+    if not 'password1' in request.POST or not request.POST['password1']:
+        errors.append('Password is required.')
+    if not 'password2' in request.POST or not request.POST['password2']:
+        errors.append('Confirm password is required.')
+
+    if 'password1' in request.POST and 'password2' in request.POST \
+            and request.POST['password1'] and request.POST['password2'] \
+            and request.POST['password1'] != request.POST['password2']:
+        errors.append('Passwords did not match.')
+
+    if len(User.objects.filter(username = request.POST['username'])) > 0:
+        errors.append('Username is already taken.')
+
+    if errors:
+        print errors
+        return render(request, 'smart_dj/register.html', context)
+
     username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            login(request,user)
-        else:
-            context = {message: 'Disabled account'}
-            return render('GET', 'smart_dj/index.html', context)
-    context = {message: 'Invalid login'}
-    return render(request, 'smart_dj/login.html', context)
+    password = request.POST['password1']
+    new_user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
+    new_user.save()
+
+    new_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
+    login(request, new_user)
+    return redirect('index')
 
 def init_room(request):
     new_room = Room()
 
     room.name = request.POST['roomname']
-    room.pin = ''.join(random.choice(string.ascii_letters+string.digits) 
-                  for i in range(8)) 
-
+    room.pin = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(8)])
     room.host = request.user
     others = room.otherPeople.all()
 
@@ -111,5 +121,4 @@ def room(request):
         j=j+1
         current=playlist[j]
 
-    return render(request, 'smart_dj/room.html', {})
-    
+    return render(request, 'smart_dj/room.html', {})    

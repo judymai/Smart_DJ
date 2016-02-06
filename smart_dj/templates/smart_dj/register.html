@@ -9,23 +9,20 @@
         <h4 class="page-head-line">Register an account</h4>
     </div>  
 </div>
-         
-<div class="row">
-    <div class="col-md-12">
-        <div class="alert alert-danger">
-	  Register failed.
-	</div>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-md-6">
-        <label>Enter Username : </label>
-        <input type="text" class="form-control" id="username" />
-        <label>Enter Password :  </label>
-        <input type="password" class="form-control" id="password" />
-        <hr />
-        <a href="{% url 'index' %}" class="btn btn-info">Register</a>
+      <form method="post" action="{% url 'register' %}">
+          <label>Enter Username : </label>
+          <input type="text" class="form-control" name="username" value="{{username}}" />
+          <label>Enter Password:  </label>
+          <input type="password" class="form-control" name="password1"/>
+          <label>Confirm Password: </label>
+          <input type="password" class="form-control" name="password2"/>
+          <hr />
+          <input type="submit" class="btn btn-info" value="Register"/>
+          {% csrf_token %}
+        </form>
     </div>
 
     <div class="col-md-6">
