@@ -10,25 +10,36 @@
     </div>  
 </div>
 
-{% if message %}
+{% if form.errors %}
+{% for error in form.errors %}
 <div class="row">
     <div class="col-md-12">
         <div class="alert alert-danger">
-	  {{message}}
+          <p id="{{error}}"></p>
+          <script>
+            if ("{{error}}" === "username")
+              document.getElementById("{{error}}").innerHTML = "Username is required.";
+            else if ("{{error}}" === "password")
+              document.getElementById("{{error}}").innerHTML = "Password is required.";
+            else if ("{{error}}" === "__all__")
+              document.getElementById("{{error}}").innerHTML = "Incorrect username and password combination.";
+          </script>
         </div>
     </div>    
 </div>
+{% endfor %}
 {% endif %}
          
 <div class="row">
     <div class="col-md-6">
       <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
         <label>Enter Username : </label>
-        <input type="text" class="form-control" id="username" />
+        <br>
+        <input type="text" class="form-control" id="id_username" name="username" />
         <label>Enter Password :  </label>
-        <input type="password" class="form-control" id="password" />
+        <input type="password" class="form-control" id="id_password" name="password" />
 	<hr />
-        <input type="submit" value="Log me in!" class="btn btn-info"/>
+        <input type="submit" value="Log me in!" class="btn btn-info"/> 
         {% csrf_token %}
       </form>
       <hr />

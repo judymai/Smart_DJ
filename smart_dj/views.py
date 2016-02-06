@@ -36,6 +36,9 @@ def profile(request):
 
 @transaction.atomic
 def register(request):
+    if request.user.is_authenticated():
+        return redirect('index')
+
     context = {}
 
     # Just display the registration form if this is a GET request
