@@ -105,23 +105,15 @@ def make_room(request):
     new_room = Room(host=request.user)
 
     new_room.name = request.POST['room_name']
-    pin = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(8)])
-    #while (Room.objects.get(pin=pin)) {
-    #    pin = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(8)])
-    #}
+    new_room.pin = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(8)])
 
     new_room.playlist_length = request.POST['num_songs']
     new_room.save()
     return redirect(reverse('room', kwargs={'pin': new_room.pin}))
 
 @login_required
-<<<<<<< Updated upstream
-def join_room(request):
-    return redirect(reverse('room', kwargs={'pin': request.POST['pin']}))
-=======
 def add_song(request):
     context = {}
-
     form = PreferencesForm(request.POST)
     context['form'] = form
 
@@ -140,7 +132,10 @@ def add_song(request):
         request.user.dislikeslist.songs.add(new_song)
 
     return redirect(reverse('profile'))
->>>>>>> Stashed changes
+
+@login_required
+def join_room(request):
+    pass
 
 @login_required
 def room(request, pin):
@@ -151,7 +146,6 @@ def room(request, pin):
 
     context['room_name'] = room.name
     context['host'] = room.host.username
-    context['pin'] = pin
 
     '''
     playlist = []
