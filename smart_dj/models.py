@@ -23,9 +23,16 @@ class Room(models.Model):
     host = models.ForeignKey(User)
     otherPeople = models.ManyToManyField(User, related_name='guests')
 
-    current = Song
-    last = Song
-
     playlist_length = models.IntegerField(default=5)
 
     expiration = models.DateField()
+
+class LikesList(models.Model):
+	user = models.OneToOneField(User)
+	songs = models.ManyToManyField(Song)
+
+class DislikesList(models.Model):
+	user = models.OneToOneField(User)
+	songs = models.ManyToManyField(Song)
+
+
