@@ -30,6 +30,18 @@ def profile(request):
 def layout(request):
     return render(request, 'smart_dj/layout.html', {})
 
+def register(request):
+    if request.user.is_authenticated():
+        return redirect('index')
+    if request.method == 'GET':
+        return render(request, 'smart_dj/register.html',{})
+    username = request.POST['username']
+    password = request.POST['password']
+    user = User.objects.create_user(username,'',password)
+    person = Person()
+    person.name = username
+    return redirect ('index')
+
 def login(request):
     if request.user.is_authenticated():
         return redirect('index')
