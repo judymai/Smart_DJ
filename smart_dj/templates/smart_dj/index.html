@@ -10,7 +10,7 @@
     </div>  
 </div>
 
-<div class="row">
+<div class="row" id="dashboard">
     <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="dashboard-div-wrapper bk-clr-one">
             <i class="fa fa-venus dashboard-div-icon" ></i>
@@ -63,29 +63,14 @@
 
       </div> <!--col-md-3-->
   
-    <div class="col-md-1"></div>
-  
     <div class="col-md-6">
         <div class="notice-board">
             <div class="panel panel-default">
               <div class="panel-heading">
-		  C U R R E N T &nbsp; R O O M S
-		  <div class="pull-right" >
-		      <div class="dropdown">
-			  <button class="btn btn-success dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-			      <span class="glyphicon glyphicon-cog"></span>
-			      <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Refresh</a></li>
-			      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Delete</a></li>
-			  </ul>
-		      </div><!--dropdown-->
-		  </div> <!--pull-right-->
+		  H O S T I N G &nbsp; R O O M S
               </div> <!--panel-heading-->
 
               <div class="panel-body">
-                  <h4>Hosting</h4>
 		  <ul>
                   {% for name,pin in hosted_rooms%}
                     <li>
@@ -96,7 +81,19 @@
                     </li>
                   {% endfor %}
                   </ul>
-                  <h4>Guest in</h4>
+	      </div><!--panel body-->
+	    </div><!--panel panel-default-->
+	</div><!--notice-board-->
+    </div><!--col-md-6-->
+
+    <div class="col-md-6">
+        <div class="notice-board">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+		  J O I N E D &nbsp; R O O M S
+              </div> <!--panel-heading-->
+
+              <div class="panel-body">
                   <ul>
                   {% for name,pin in guest_rooms%}
                     <li>
@@ -112,7 +109,7 @@
 	    </div><!--panel panel-default-->
 	</div><!--notice-board-->
     </div><!--col-md-6-->
-
+    
 </div> <!--row-->
 
 {% endblock %}
