@@ -16,12 +16,6 @@ class Song(models.Model):
     title = models.TextField(default='Unknown Title')
     artist = models.TextField(default='Unknown Artist')
 
-class Person(models.Model):
-    name = models.CharField(max_length=30, default='')
-
-    likes =  models.ManyToManyField(Song, related_name='person_likes')
-    dislikes = models.ManyToManyField(Song, related_name='person_dislikes')
-
 class Room(models.Model):
     name = models.CharField(max_length=50)
     pin = models.CharField(max_length=8)
@@ -35,4 +29,3 @@ class Room(models.Model):
     playlist_length = models.IntegerField(default=5)
 
     expiration = models.DateField()
-     
