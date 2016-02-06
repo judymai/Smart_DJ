@@ -6,20 +6,18 @@
 {% block body %}
 <div class="row">
     <div class="col-md-12">
-        <h4 class="page-head-line">Login to get started</h4>
+        <h4 class="page-head-line">Register an account</h4>
     </div>  
 </div>
-
-{% if message %}
+         
 <div class="row">
     <div class="col-md-12">
         <div class="alert alert-danger">
-	  {{message}}
-        </div>
-    </div>    
+	  Register failed.
+	</div>
+    </div>
 </div>
-{% endif %}
-         
+
 <div class="row">
     <div class="col-md-6">
         <label>Enter Username : </label>
@@ -27,7 +25,7 @@
         <label>Enter Password :  </label>
         <input type="password" class="form-control" id="password" />
         <hr />
-        <a href="{% url 'index' %}" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Log Me In </a>&nbsp;
+        <a href="{% url 'index' %}" class="btn btn-info">Register</a>
     </div>
 
     <div class="col-md-6">
