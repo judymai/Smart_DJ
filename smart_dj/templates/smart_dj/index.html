@@ -77,7 +77,18 @@
               </div> <!--panel-heading-->
 
               <div class="panel-body">
-		  <ul><!--
+		  <ul>
+          {% for name,pin in rooms%}
+            <li>
+                  <a href="{% url 'room' pin%}">
+                  <span class="glyphicon glyphicon-align-left text-success" ></span> 
+                  {{name}}
+              </a>
+              </li>
+              <li>
+          {% endfor %}
+
+          <!--
 		      <li>
 		          <a href="">
 			      <span class="glyphicon glyphicon-align-left text-success" ></span> 

@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^logout$', 'django.contrib.auth.views.logout_then_login', name='logout'),
     url(r'^register/$', 'smart_dj.views.register', name='register'),
     url(r'^make_room/$', 'smart_dj.views.make_room', name='make_room'),
-    url(r'^room/(?P<id>\d+)$', 'smart_dj.views.room', name='room')
+    url(r'^room/(?P<pin>[a-zA-Z0-9_@\+\-]+)$', 'smart_dj.views.room', name='room')
 ]

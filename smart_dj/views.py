@@ -18,12 +18,13 @@ import os
 # Create your views here.
 @login_required
 def index(request):
-    '''
-    user = User.objects.filter(username=request.user.username)
-    rooms = Room.objects.filter(Person=user) [:5]
-    context = {rooms: rooms}
-    '''
-    return render(request, 'smart_dj/index.html', {})
+    context = {}
+    user = User.objects.get(username=request.user.username)
+    rooms = Room.objects.filter(host=user) [:5]
+    context['rooms'] = []
+    for room in rooms:
+        context['rooms'].append((room.name,room.pin))
+    return render(request, 'smart_dj/index.html', context)
 
 def about(request):
     return render(request, 'smart_dj/about.html', {})
@@ -94,14 +95,14 @@ def make_room(request):
 
     new_room.playlist_length = request.POST['num_songs']
     new_room.save()
-    return redirect(reverse('room', kwargs={'id': new_room.id}))
+    return redirect(reverse('room', kwargs={'pin': new_room.pin}))
 
 @login_required
-def room(request, id):
+def room(request, pin):
     context = {}
 
     user = User.objects.get(id=request.user.id)
-    room = Room.objects.get(host=user,id=id)
+    room = Room.objects.get(host=user,pin=pin)
 
     context['room_name'] = room.name
     context['host'] = room.host.username
