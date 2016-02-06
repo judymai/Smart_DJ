@@ -39,7 +39,7 @@
 
 			<div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          <a class="btn btn-primary" href="">Save changes</a>
+                          <a class="btn btn-primary" href="">Create room</a>
                         </div> <!-- modal footer-->
 		    </div> <!-- modal content-->
                 </div> <!-- modal dialog-->
@@ -52,8 +52,8 @@
             <h5>Join Room</h5>
             <form method="post" action="{% url 'join_room' %}">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="pin" placeholder="Enter pin" />
-                    <input type="submit" value="Join room!">
+                    <input type="text" class="form-control" id="join" name="pin" placeholder="Enter pin" />
+		    <input type="submit" class="btn btn-info btn-sm" value="Join room!" />
                     {% csrf_token %}
                 </div>
             </form>
@@ -127,7 +127,6 @@
 	      </div><!--panel body-->
 	    </div><!--panel panel-default-->
 	</div><!--notice-board-->
-	<hr />
     </div><!--col-md-6-->
 </div> <!--row-->
 

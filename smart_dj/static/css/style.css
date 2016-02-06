@@ -37,7 +37,15 @@ body {
     margin-top: 40px;
     min-height: 600px;
     padding-bottom: 60px;
-    color: #DDDDDD; /*#8F4FCC;*/ white;
+    color: #3D3D3D; /*#8F4FCC;*/
+}
+
+.content-wrapper .label {
+    color: #DDDDDD;
+}
+
+.content-wrapper #title {
+    color: #DDDDDD;
 }
 
 .page-head-line {
