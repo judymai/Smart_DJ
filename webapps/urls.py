@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^about/$', 'smart_dj.views.about', name='about'),
     url(r'^profile/$', 'smart_dj.views.profile', name='profile'),
     url(r'^login$', 'django.contrib.auth.views.login', {'template_name':'smart_dj/login.html'}, name='login'),
+    url(r'^logout$', 'django.contrib.auth.views.logout_then_login', name='logout'),
     url(r'^register/$', 'smart_dj.views.register', name='register'),
     url(r'^room/$', 'smart_dj.views.room', name='room')
 ]
