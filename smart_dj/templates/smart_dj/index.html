@@ -16,7 +16,7 @@
             <i class="fa fa-venus dashboard-div-icon" ></i>
             <h5>Create Room</h5>
             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Create</button>
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" <!--style="display: none;"-->>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <!--style="display: none;"-->
                 <div class="modal-dialog">
                     <div class="modal-content"> 
                         <div class="modal-header">
@@ -31,8 +31,8 @@
 				    <input type="text" class="form-control" name="room_name" />
 				    <label for="num_songs">Number of songs on playlist</label>
 				    <input type="text" class="form-control" name="num_songs" />
-                    <input type="submit" value="Make room!">
-                    {% csrf_token %}
+                                    <input type="submit" value="Make room!">
+                                    {% csrf_token %}
 				</div>
 			    </form>
 			</div> <!-- modal body-->
@@ -50,7 +50,13 @@
         <div class="dashboard-div-wrapper bk-clr-two">
             <i  class="fa fa-edit dashboard-div-icon" ></i>
             <h5>Join Room</h5>
-            <input type="text" class="form-control" placeholder="Enter pin" />
+            <form method="post" action="{% url 'join_room' %}">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="pin" placeholder="Enter pin" />
+                    <input type="submit" value="Join room!">
+                    {% csrf_token %}
+                </div>
+            </form>
         </div> <!-- dashboard-->
 
       </div> <!--col-md-3-->
