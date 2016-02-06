@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 
 from smart_dj.utils import sp
+from models import *
 
+import string
+import random
 import spotipy
 import os
 
@@ -68,11 +71,8 @@ def init_room(request):
     new_room = Room()
 
     room.name = request.POST['roomname']
-    room.pin = ''
-    i=0
-    while (i < 8):
-        room.pin=room.pin + random.choice(string.ascii_letters+string.digits))
-        i=i+1
+    room.pin = ''.join(random.choice(string.ascii_letters+string.digits) 
+                  for i in range(8)) 
 
     room.host = request.user
     others = room.otherPeople.all()
@@ -84,6 +84,8 @@ def init_room(request):
     #room.expiration = request.POST('')
 
 def room(request):
+    if request.method == 'GET':
+        return render(request, 'smart_dj/room.html',{})
     my_room=init_room(request)
     playlist = []
     preflist = []
@@ -100,11 +102,10 @@ def room(request):
     while (my_room.current!=my_room.last):
         if(my_room.current==my_room.last):
             while (i < (my_room.playlistLength)):
-                song = random.choice(songlist)
-                if (song not in playlist) and
-		   (song not in blacklist):
-                   playlist[i] = random.choice(songlist)
-                    i=i+1
+                song = random.choice(preflist)
+                if (song not in playlist) and (song not in blacklist):
+                   playlist[i] = random.choice(preflist)
+                   i=i+1
                 current = playlist[0]
         last = playlist[my_room.playlistLength-1]
         j=j+1
