@@ -12,3 +12,9 @@ def profile(request):
 
 def layout(request):
     return render(request, 'smart_dj/layout.html', {})
+
+def login(request):
+    return render(request, 'smart_dj/login.html', {})
+
+def room(request):
+    return render(request, 'smart_dj/room.html', {})
