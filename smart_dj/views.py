@@ -89,7 +89,7 @@ def init_room(request):
 
     room.current = ''
     room.last = ''
-    room.playlistLength = request.POST['num_songs']
+    room.playlist_length = request.POST['num_songs']
 
     #room.expiration = request.POST('')
 
