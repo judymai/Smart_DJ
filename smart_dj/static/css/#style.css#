@@ -95,6 +95,7 @@ header {
     text-align: right;
 }
 
+
 /* =============================================================
    LOGO SECTION STYLES
  ============================================================ */
@@ -118,12 +119,12 @@ header {
 .user-settings-wrapper .nav > li > a {
     position: relative;
     display: block;
-    padding: 5px 5px;
+    padding: 15px 18px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    height: 90px;
-    width: 90px;
+    height: 100px;
+    width: 6px;
     background-color: #2F516B; /*#11204D;*/ /*#F0677C;*/
     color: #fff;
 }
@@ -148,8 +149,8 @@ header {
     }
 
     .user-settings-wrapper img {
-        height: 80px;
-        width: 80px;
+        height: 50px;
+        width: 50px;
         border: 0px solid #000000;
     }
 
@@ -342,9 +343,6 @@ footer {
     text-align: center;
     transform: translateX(20%);
 }
-<<<<<<< HEAD
-=======
-}
 
 #white-container {
     background-color: #F7F7F7;
@@ -353,13 +351,25 @@ footer {
 }
 
 /*==============================================
-   EMAIL LINKS    
+    IMAGES ON ABOUT PAGE    
  =============================================*/
 
-a:link {
-    color:white;
+.image{
+    position: relative;
+    width:100%
 }
 
-a:visited{
-   color:blue;
+h2{
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+}
+
+h2 span{
+    color: white;
+    letter-spacing:-1 px;
+    background: rgb(0,0,0);
+    opacity: 0.4;
+    padding: 10px;
 }
