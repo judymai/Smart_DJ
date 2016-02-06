@@ -59,5 +59,8 @@ def login(request):
     context = {message: 'Invalid login'}
     return render(request, 'smart_dj/login.html', context)
 
+def register(request):
+    return render(request, 'smart_dj/register.html', {})
+
 def room(request):
     return render(request, 'smart_dj/room.html', {})
