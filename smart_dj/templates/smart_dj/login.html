@@ -4,6 +4,11 @@
 {% endblock %}
 
 {% block body %}
+
+{% if user.is_authenticated %}
+    <meta http-equiv="refresh" content="0; {% url 'index' %} " />
+{% endif %}
+
 <div class="row">
     <div class="col-md-12">
         <h4 class="page-head-line">Login to get started</h4>
