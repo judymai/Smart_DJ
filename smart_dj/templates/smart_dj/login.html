@@ -10,13 +10,15 @@
     </div>  
 </div>
 
+{% if message %}
 <div class="row">
     <div class="col-md-12">
         <div class="alert alert-danger">
-	  Login failed, try again.
+	  {{message}}
         </div>
     </div>    
 </div>
+{% endif %}
          
 <div class="row">
     <div class="col-md-6">
