@@ -72,7 +72,7 @@ def init_room(request):
     i=0
     while (i < 8):
         room.pin=room.pin + random.choice(string.ascii_letters+string.digits))
-        i++
+        i=i+1
 
     room.host = request.user
     others = room.otherPeople.all()
@@ -93,7 +93,7 @@ def room(request):
     for k in otherPeople.all():
         preflist[j] = k.otherPeople.likes.all()
         blacklist[j] = k.otherPeople.dislikes.all()
-        j++
+        j=j+1
 
     i=0
     j=0
@@ -104,10 +104,10 @@ def room(request):
                 if (song not in playlist) and
 		   (song not in blacklist):
                    playlist[i] = random.choice(songlist)
-                    i++
+                    i=i+1
                 current = playlist[0]
         last = playlist[my_room.playlistLength-1]
-        j++
+        j=j+1
         current=playlist[j]
 
     return render(request, 'smart_dj/room.html', {})
