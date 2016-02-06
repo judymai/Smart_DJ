@@ -6,7 +6,7 @@
 {% block body %}
 <div class="row">
     <div class="col-md-12">
-      <h4 class="page-head-line">Home Page</h4>
+      <h4 class="page-head-line">D A S H B O A R D</h4>
     </div>  
 </div>
 
@@ -14,7 +14,7 @@
     <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="dashboard-div-wrapper bk-clr-one">
             <i class="fa fa-venus dashboard-div-icon" ></i>
-            <h5>Create Room</h5>
+            <h5>C R E A T E &nbsp; R O O M</h5>
             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Create</button>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> <!--style="display: none;"-->
                 <div class="modal-dialog">
@@ -31,16 +31,18 @@
 				    <input type="text" class="form-control" name="room_name" />
 				    <label for="num_songs">Number of songs on playlist</label>
 				    <input type="text" class="form-control" name="num_songs" />
-                                    <input type="submit" value="Make room!">
+				    <br>
+                                    <input type="submit" class="btn btn-primary"value="Make room!">
                                     {% csrf_token %}
 				</div>
 			    </form>
 			</div> <!-- modal body-->
-
+<!--
 			<div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                           <a class="btn btn-primary" href="">Create room</a>
                         </div> <!-- modal footer-->
+
 		    </div> <!-- modal content-->
                 </div> <!-- modal dialog-->
             </div> <!--modal fade-->
@@ -49,7 +51,7 @@
 
         <div class="dashboard-div-wrapper bk-clr-two">
             <i  class="fa fa-edit dashboard-div-icon" ></i>
-            <h5>Join Room</h5>
+            <h5>J O I N &nbsp; R O O M</h5>
             <form method="post" action="{% url 'join_room' %}">
                 <div class="form-group">
                     <input type="text" class="form-control" id="join" name="pin" placeholder="Enter pin" />
@@ -67,7 +69,7 @@
         <div class="notice-board">
             <div class="panel panel-default">
               <div class="panel-heading">
-		  Current Rooms 
+		  C U R R E N T &nbsp; R O O M S
 		  <div class="pull-right" >
 		      <div class="dropdown">
 			  <button class="btn btn-success dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
