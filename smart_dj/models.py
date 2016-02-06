@@ -25,8 +25,6 @@ class Room(models.Model):
 
     playlist_length = models.IntegerField(default=5)
 
-    expiration = models.DateField()
-
 class LikesList(models.Model):
 	user = models.OneToOneField(User)
 	songs = models.ManyToManyField(Song)

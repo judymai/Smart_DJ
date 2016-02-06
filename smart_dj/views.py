@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.db import transaction
 
+from django.core.urlresolvers import reverse
+
 from smart_dj.utils import sp
 from smart_dj.models import *
 
@@ -28,17 +30,13 @@ def about(request):
 
 @login_required
 def profile(request):
-    user = Person.objects.filter(username=request.user.username)
-    like = Song.objects.filter(Person=user, related_name='person_likes') [:5]
-    dislike=Song.objects.filter(Person=user,related_name='person_dislikes')[:5]
-    context = {likes: like, dislikes: dislike}
-    return render(request, 'smart_dj/profile.html', context)
+    user = User.objects.get(id=request.user.id)
+    likes_content = LikesList.objects.get(user=user)
+    dislikes_content = DislikesList.objects.get(user=user)
+    return render(request, 'smart_dj/profile.html', {})
 
 @transaction.atomic
 def register(request):
-    if request.user.is_authenticated():
-        return redirect('index')
-
     context = {}
 
     # Just display the registration form if this is a GET request
@@ -78,28 +76,37 @@ def register(request):
     new_user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
     new_user.save()
 
+    likes = LikesList(user=new_user)
+    dislikes = DislikesList(user=new_user)
+    likes.save()
+    dislikes.save()
+
     new_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
     login(request, new_user)
     return redirect('index')
 
-def init_room(request):
-    new_room = Room()
+@login_required
+def make_room(request):
+    new_room = Room(host=request.user)
 
-    room.name = request.POST['roomname']
-    room.pin = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(8)])
-    room.host = request.user
-    others = room.otherPeople.all()
+    new_room.name = request.POST['room_name']
+    new_room.pin = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(8)])
 
-    room.current = ''
-    room.last = ''
-    room.playlist_length = request.POST['num_songs']
+    new_room.playlist_length = request.POST['num_songs']
+    new_room.save()
+    return redirect(reverse('room', kwargs={'id': new_room.id}))
 
-    #room.expiration = request.POST('')
+@login_required
+def room(request, id):
+    context = {}
 
-def room(request):
-    if request.method == 'GET':
-        return render(request, 'smart_dj/room.html',{})
-    my_room=init_room(request)
+    user = User.objects.get(id=request.user.id)
+    room = Room.objects.get(host=user,id=id)
+
+    context['room_name'] = room.name
+    context['host'] = room.host.username
+
+    '''
     playlist = []
     preflist = []
     blacklist = []
@@ -123,5 +130,6 @@ def room(request):
         last = playlist[my_room.playlistLength-1]
         j=j+1
         current=playlist[j]
+    '''
 
-    return render(request, 'smart_dj/room.html', {})    
+    return render(request, 'smart_dj/room.html', context)    

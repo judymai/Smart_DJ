@@ -25,19 +25,21 @@
                         </div> <!--modal header-->
     
 			<div class="modal-body">
-			    <form>
+			    <form method="post" action="{% url 'make_room' %}">
 			        <div class="form-group">
-				    <label for="roomname">Room name</label>
-				    <input type="text" class="form-control" id="roomname" />
-				    <label for="numsongs">Number of songs on playlist</label>
-				    <input type="text" class="form-control" id="numsongs" />
+				    <label for="room_name">Room name</label>
+				    <input type="text" class="form-control" name="room_name" />
+				    <label for="num_songs">Number of songs on playlist</label>
+				    <input type="text" class="form-control" name="num_songs" />
+                    <input type="submit" value="Make room!">
+                    {% csrf_token %}
 				</div>
 			    </form>
 			</div> <!-- modal body-->
 
 			<div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          <a class="btn btn-primary" href="{% url 'room' %}">Save changes</a>
+                          <a class="btn btn-primary" href="">Save changes</a>
                         </div> <!-- modal footer-->
 		    </div> <!-- modal content-->
                 </div> <!-- modal dialog-->
@@ -75,35 +77,35 @@
               </div> <!--panel-heading-->
 
               <div class="panel-body">
-		  <ul>
+		  <ul><!--
 		      <li>
-		          <a href="{% url 'room' %}">
+		          <a href="">
 			      <span class="glyphicon glyphicon-align-left text-success" ></span> 
 			      414 Musics
 			      <span class="label label-warning" > Just now </span>
 			  </a>
 		      </li>
 		      <li>
-			  <a href="{% url 'room' %}">
+			  <a href="">
 			      <span class="glyphicon glyphicon-info-sign text-danger" ></span>  
 			      Marcus's Crib
 			      <span class="label label-info" > 2 min chat</span>
 			  </a>
 		      </li>
 		      <li>
-			  <a href="{% url 'room' %}">
+			  <a href="">
 			      <span class="glyphicon glyphicon-comment  text-warning" ></span>  
 			      Tartanhacks jam
 			      <span class="label label-success" >GO ! </span>
 			  </a>
 		      </li>
 		      <li>
-			  <a href="{% url 'room' %}">
+			  <a href="">
 			      <span class="glyphicon glyphicon-edit  text-danger" ></span>  
 			      WRCT Station
 			      <span class="label label-success" >Let's have it </span>
 			  </a>
-		      </li>
+		      </li> -->
 		  </ul>
 	      </div><!--panel body-->
 	    </div><!--panel panel-default-->
