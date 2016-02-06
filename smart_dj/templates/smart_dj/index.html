@@ -85,16 +85,27 @@
               </div> <!--panel-heading-->
 
               <div class="panel-body">
+                  <h4>Hosting</h4>
 		  <ul>
-          {% for name,pin in rooms%}
-            <li>
-                  <a href="{% url 'room' pin%}">
-                  <span class="glyphicon glyphicon-align-left text-success" ></span> 
-                  {{name}}
-              </a>
-              </li>
-              <li>
-          {% endfor %}
+                  {% for name,pin in hosted_rooms%}
+                    <li>
+                      <a href="{% url 'room' pin%}">
+                      <span class="glyphicon glyphicon-align-left text-success" ></span> 
+                      {{name}}
+                      </a>
+                    </li>
+                  {% endfor %}
+                  </ul>
+                  <h4>Guest in</h4>
+                  <ul>
+                  {% for name,pin in guest_rooms%}
+                    <li>
+                      <a href="{% url 'room' pin%}">
+                      <span class="glyphicon glyphicon-align-left text-success" ></span> 
+                      {{name}}
+                      </a>
+                    </li>
+                  {% endfor %}
 
 		  </ul>
 	      </div><!--panel body-->

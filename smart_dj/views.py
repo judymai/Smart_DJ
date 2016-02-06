@@ -21,10 +21,14 @@ import os
 def index(request):
     context = {}
     user = User.objects.get(username=request.user.username)
-    rooms = Room.objects.filter(host=user) [:5]
-    context['rooms'] = []
-    for room in rooms:
-        context['rooms'].append((room.name,room.pin))
+    hosted_rooms = Room.objects.filter(host=user) [:5]
+    guest_rooms = Room.objects.filter(otherPeople=user) [:5]
+    context['hosted_rooms'] = []
+    for room in hosted_rooms:
+        context['hosted_rooms'].append((room.name,room.pin))
+    context['guest_rooms'] = []
+    for room in guest_rooms:
+        context['guest_rooms'].append((room.name,room.pin))
     search_results = sp.search(q='Snoop Dogg',limit = 1,offset=0,type='artist')
     artist_uri = search_results['artists']['items'][0]['uri']
     for i in sp.artist_top_tracks(artist_uri)['tracks']:
@@ -135,17 +139,28 @@ def add_song(request):
 
 @login_required
 def join_room(request):
-    pass
+    pin = request.POST['pin']
+    user = request.user
+    host = Room.objects.filter(host=user,pin=pin)
+    rooms = Room.objects.filter(otherPeople=user,pin=pin)
+    if (len(host)==0 and len(rooms)==0):
+        room=Room.objects.get(pin=pin)
+        room.otherPeople.add(user)
+        room.save()
+    return redirect(reverse('room', kwargs={'pin': request.POST['pin']}))
 
 @login_required
 def room(request, pin):
     context = {}
 
     user = User.objects.get(id=request.user.id)
-    room = Room.objects.get(host=user,pin=pin)
+    room = Room.objects.get(pin=pin)
+    guests = User.objects.filter(guests=room)
 
     context['room_name'] = room.name
     context['host'] = room.host.username
+    context['pin'] = room.pin
+    context['guests'] = guests
 
     '''
     playlist = []
