@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from smart_dj.utils import sp
+
+import spotipy
+import os
 
 # Create your views here.
 def index(request):
