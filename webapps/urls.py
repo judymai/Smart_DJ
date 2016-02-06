@@ -21,7 +21,6 @@ urlpatterns = [
     url(r'^$', 'smart_dj.views.index', name='index'),
     url(r'^about/$', 'smart_dj.views.about', name='about'),
     url(r'^layout/$', 'smart_dj.views.layout', name='layout'),
-    url(r'^index/$', 'smart_dj.views.index', name='index'),
     url(r'^profile/$', 'smart_dj.views.profile', name='profile'),
     url(r'^login/$', 'smart_dj.views.login', name='login'),
     url(r'^room/$', 'smart_dj.views.room', name='room')
