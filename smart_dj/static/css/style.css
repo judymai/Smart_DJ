@@ -95,7 +95,6 @@ header {
     text-align: right;
 }
 
-
 /* =============================================================
    LOGO SECTION STYLES
  ============================================================ */
@@ -342,28 +341,4 @@ footer {
     width: 70%;
     text-align: center;
     transform: translateX(20%);
-}
-
-/*==============================================
-    IMAGES ON ABOUT PAGE    
- =============================================*/
-
-.image{
-    position: relative;
-    width:100%
-}
-
-h2{
-    position: absolute;
-    top: 0px;
-    left: 0;
-    width: 100%;
-}
-
-h2 span{
-    color: white;
-    letter-spacing:-1 px;
-    background: rgb(0,0,0);
-    opacity: 0.4;
-    padding: 10px;
 }
