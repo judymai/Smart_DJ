@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-def index(request):
+def about(request):
     return render(request, 'smart_dj/about.html', {})
 
 def layout(request):
