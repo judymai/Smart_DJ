@@ -36,10 +36,15 @@ def register(request):
     if request.method == 'GET':
         return render(request, 'smart_dj/register.html',{})
     username = request.POST['username']
+    if len(User.objects.filter(username=username)) == 0:
+        message = 'Username already taken'
+        return render(request, 'smart_dj/register.html',{message: message})
     password = request.POST['password']
     user = User.objects.create_user(username,'',password)
+    user.save()
     person = Person()
     person.name = username
+    person.save()
     return redirect ('index')
 
 def login(request):
@@ -58,9 +63,6 @@ def login(request):
             return render('GET', 'smart_dj/index.html', context)
     context = {message: 'Invalid login'}
     return render(request, 'smart_dj/login.html', context)
-
-def register(request):
-    return render(request, 'smart_dj/register.html', {})
 
 def room(request):
     return render(request, 'smart_dj/room.html', {})
