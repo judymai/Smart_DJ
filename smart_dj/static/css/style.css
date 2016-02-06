@@ -95,13 +95,13 @@ header {
 }
 
 .navbar-brand {
-    width: 500px;
+    display: block;
+    width: 150px;
     padding-top: 30px;
     text-align: center;
-}
-
-.navbar-brand > img {
-    text-align: center;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
 }
 
 /* USER SETTINGS DIV */
@@ -316,4 +316,11 @@ footer {
 
 .btn-google {
     background-color: #c32f10;
+}
+
+/*==============================================
+    DASHBOARD  STYLES    
+ =============================================*/
+.modal-content {
+    color: black;
 }

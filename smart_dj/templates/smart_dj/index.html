@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="dashboard-div-wrapper bk-clr-one">
-            <i  class="fa fa-venus dashboard-div-icon" ></i>
+            <i class="fa fa-venus dashboard-div-icon" ></i>
             <h5>Create Room</h5>
             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Create</button>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" <!--style="display: none;"-->>
@@ -21,10 +21,21 @@
                     <div class="modal-content"> 
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                          <h4 class="modal-title" id="myModalLabel">Create room</h4>CreateRoom
+                          <h4 class="modal-title" id="myModalLabel">Create room</h4>
                         </div> <!--modal header-->
-                          
--			<div class="modal-footer">
+    
+			<div class="modal-body">
+			    <form>
+			        <div class="form-group">
+				    <label for="name">Room name</label>
+				    <input type="text" class="form-control" id="roomName">
+				    <label for="name">Number of songs on playlist</label>
+				    <input type="text" class="form-control" id="roomName">
+				</div>
+			    </form>
+			</div> <!-- modal body-->
+
+			<div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                           <a class="btn btn-primary" href="{% url 'room' %}">Save changes</a>
                         </div> <!-- modal footer-->
