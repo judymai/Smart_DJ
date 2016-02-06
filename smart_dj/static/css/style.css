@@ -24,6 +24,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 30px;
+    background-color: #151515;
 }
 
 .set-radius-zero {
@@ -36,14 +37,15 @@ body {
     margin-top: 40px;
     min-height: 600px;
     padding-bottom: 60px;
+    color: #DDDDDD; /*#8F4FCC;*/ white;
 }
 
 .page-head-line {
     font-weight: 900;
     padding-bottom: 20px;
-    border-bottom: 2px solid #F0677C;
+    border-bottom: 2px solid /*white;*/ /*#60B2E5;*/ /*#11204D;*/ #F0677C;
     text-transform: uppercase;
-    color: #F0677C;
+    color: white; /* #60B2E5;*/ /* #11204D;*/   /*#F0677C;*/
     font-size: 20px;
     margin-bottom: 40px;
 }
@@ -70,7 +72,7 @@ margin-bottom: 20px;
 color: #fff;
 text-align: center;
 cursor:pointer;
-background-color:#F0677C;
+background-color: #11204D; /*#F0677C;*/
 -webkit-border-radius:50%;
     -moz-border-radius:50%;
 }
@@ -78,7 +80,8 @@ background-color:#F0677C;
    HEADER SECTION STYLES
  ============================================================ */
 header {
-    background-color: #F0677C;
+    background-color: #11204D;
+/*    background-color: #F0677C;*/
     color: #fff;
     padding: 10px;
     text-align: right;
@@ -114,7 +117,7 @@ header {
     -moz-border-radius: 50%;
     height: 60px;
     width: 60px;
-    background-color: #F0677C;
+    background-color: #2F516B; /*#11204D;*/ /*#F0677C;*/
     color: #fff;
 }
 
@@ -131,9 +134,10 @@ header {
         padding: 10px;
     }
 
+    /* hover over user button */
     .user-settings-wrapper .nav > li > a:hover,.user-settings-wrapper .nav > li > a:focus {
         text-decoration: none;
-        background-color: #C36464!important;
+        background-color: #60B2E5!important;
     }
 
     .user-settings-wrapper img {
@@ -162,7 +166,7 @@ header {
 /* MENU LINKS SECTION*/
 
 .menu-section {
-    background-color: #3D3D3D;
+    background-color: #3D3D3D; /* gray */
 }
 
 #menu-top a {
@@ -186,17 +190,18 @@ header {
 }
 
 .navbar-inverse {
-    background-color: #C36464;
+    background-color: red;
     border-color: transparent;
 }
 
 .navbar-toggle {
-    background-color: #F0677C;
+    background-color: red;
     border: 1px solid #fff;
 }
 
 .navbar {
     margin-bottom: 0px;
+    background-color: #16213F; /*#11204D;*/
 }
 /* =============================================================
    FOOTER SECTION STYLES
@@ -220,7 +225,7 @@ footer {
 /* DASHBOARD ICONS */
 
 .bk-clr-one {
-    background-color: #B9B739;
+    background-color: #6A3BAA; /*#5111AA; /*7E47B2; /*#D372B2;*/ /*#B9B739;*/
 }
 
 .bk-clr-two {
@@ -323,4 +328,10 @@ footer {
  =============================================*/
 .modal-content {
     color: black;
+}
+
+#join {
+    width: 70%;
+    text-align: center;
+    transform: translateX(20%);
 }
