@@ -91,7 +91,7 @@ def make_room(request):
     new_room = Room(host=request.user)
 
     new_room.name = request.POST['room_name']
-    pin = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(8)])
+    new_room.pin = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(8)])
     #while (Room.objects.get(pin=pin)) {
     #    pin = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(8)])
     #}

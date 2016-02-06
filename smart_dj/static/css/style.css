@@ -344,6 +344,12 @@ footer {
     transform: translateX(20%);
 }
 
+#white-container {
+    background-color: #F7F7F7;
+    padding: 15px 15px 15px 15px;
+    border-radius: 3px;
+}
+
 /*==============================================
     IMAGES ON ABOUT PAGE    
  =============================================*/
