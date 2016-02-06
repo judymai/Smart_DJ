@@ -2,20 +2,33 @@ from django.db import models
 
 # Create your models here.
 class Person(models.Model):
-	likes =  models.ManyToManyField()
-	dislikes =
-	
-	def addLike ():
-	   return 0
-	def addDislike ():
-	   return 0
-	def rmLike ():
-	   return 0
-	def rmDislike ():
-	   return 0
-	   
-	   
-class Room(models.Model):
-    host = 0
+    email = models.TextField()
 
-class Songs(models.Model):
+    likes =  models.ManytoManyField(Music)
+    dislikes = models.ManyToManyField(Music)
+
+    rooms = models.ManyToManyField(Room)
+    
+class Room(models.Model):
+    name = models.CharField(max_length=50)
+    pin = models.CharField(max_length=8)
+
+    host = models.ForeignKey(Person)
+
+    current = Song
+    last = Song
+
+    playlistLength = models.IntegerField()
+
+    expiration = models.DateField()
+
+class Music(models.Model):
+    name = models.TextField() 
+
+class Artist(Music):
+    ID = models.TextField()
+
+class Genre(Music):
+
+class Song(Music):
+    ID = models.TextField()
