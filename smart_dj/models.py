@@ -32,7 +32,7 @@ class Room(models.Model):
     current = Song
     last = Song
 
-    playlistLength = models.IntegerField(default=5)
+    playlist_length = models.IntegerField(default=5)
 
     expiration = models.DateField()
      
