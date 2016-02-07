@@ -7,7 +7,7 @@ from django.db import transaction
 
 from django.core.urlresolvers import reverse
 
-from smart_dj.utils import sp
+from smart_dj.utils import sp, get_artist_hits
 from smart_dj.forms import *
 from smart_dj.models import *
 
@@ -29,10 +29,6 @@ def index(request):
     context['guest_rooms'] = []
     for room in guest_rooms:
         context['guest_rooms'].append((room.name,room.pin))
-    search_results = sp.search(q='Snoop Dogg',limit = 1,offset=0,type='artist')
-    artist_uri = search_results['artists']['items'][0]['uri']
-    for i in sp.artist_top_tracks(artist_uri)['tracks']:
-        print i['name']
     return render(request, 'smart_dj/index.html', context)
 
 def about(request):
@@ -157,11 +153,27 @@ def room(request, pin):
     room = Room.objects.get(pin=pin)
     guests = User.objects.filter(guests=room)
 
+    guests = room.otherPeople.all()
+
+    liked_artists = []
+    for guest in guests:
+        likes = guest.likeslist.songs.all()
+        liked_artists = liked_artists + [s.artist for s in likes]
+
     context['room_name'] = room.name
     context['host'] = room.host.username
     context['pin'] = room.pin
     context['guests'] = guests
 
+    top_songs = []
+    for artist in liked_artists:
+        top_songs = top_songs + get_artist_hits(artist)
+
+    context['playlist_uri'] = ','.join(top_songs)
+    context['playlist'] = []
+    for song in top_songs:
+        spotify_song = sp.track(song)
+        context['playlist'].append((spotify_song['name'],spotify_song['artists'][0]['name']))
     '''
     playlist = []
     preflist = []
