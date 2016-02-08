@@ -1,1 +1,1 @@
-web: gunicorn smart_dj.wsgi --fog-file -
+web: python manage.py runserver 0.0.0.0:$PORT
