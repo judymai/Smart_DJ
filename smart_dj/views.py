@@ -169,6 +169,8 @@ def room(request, pin):
     for artist in liked_artists:
         top_songs = top_songs + get_artist_hits(artist)
 
+    random.shuffle(top_songs)
+
     context['playlist_uri'] = ','.join(top_songs)
     context['playlist'] = []
     for song in top_songs:
