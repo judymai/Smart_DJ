@@ -169,35 +169,12 @@ def room(request, pin):
     for artist in liked_artists:
         top_songs = top_songs + get_artist_hits(artist)
 
+    random.shuffle(top_songs)
+
     context['playlist_uri'] = ','.join(top_songs)
     context['playlist'] = []
     for song in top_songs:
         spotify_song = sp.track(song)
         context['playlist'].append((spotify_song['name'],spotify_song['artists'][0]['name']))
-    '''
-    playlist = []
-    preflist = []
-    blacklist = []
 
-    j=0
-    for k in otherPeople.all():
-        preflist[j] = k.otherPeople.likes.all()
-        blacklist[j] = k.otherPeople.dislikes.all()
-        j=j+1
-
-    i=0
-    j=0
-    while (my_room.current!=my_room.last):
-        if(my_room.current==my_room.last):
-            while (i < (my_room.playlistLength)):
-                song = random.choice(preflist)
-                if (song not in playlist) and (song not in blacklist):
-                   playlist[i] = random.choice(preflist)
-                   i=i+1
-                current = playlist[0]
-        last = playlist[my_room.playlistLength-1]
-        j=j+1
-        current=playlist[j]
-    '''
-
-    return render(request, 'smart_dj/room.html', context)    
+    return render(request, 'smart_dj/room.html', context)

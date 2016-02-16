@@ -4,6 +4,8 @@
 *.rej
 .installed.cfg
 __minitage__*
+venv
+staticfiles
 bin/*
 develop-eggs
 downloads
